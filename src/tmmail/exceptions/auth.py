@@ -1,4 +1,4 @@
-from .exception import TmMailException
+from .exceptions import TmMailException
 
 
 class AuthException(TmMailException):
