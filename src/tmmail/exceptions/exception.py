@@ -1,0 +1,2 @@
+class TmMailException(Exception):
+    pass

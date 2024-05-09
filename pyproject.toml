@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "tmmail"
+version = "0.1.0"
+description = "A package that facilitates interaction with the Temp Mail API"
+authors = ["Piotr Ginał"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pydantic = "^2.7.1"
+requests = "^2.31.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
