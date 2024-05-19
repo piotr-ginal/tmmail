@@ -14,3 +14,12 @@ class UnhandledStatusCodeException(TmMailException):
             )
 
             super().__init__(message)
+
+
+class TooManyRequestsException(TmMailException):
+
+    def __init__(self, *, message: typing.Optional[str] = None) -> None:
+        if message is None:
+            message = "Too many requests"
+
+        super().__init__(message)
