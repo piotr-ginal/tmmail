@@ -1,4 +1,5 @@
 from importlib.metadata import version
+
 __version__ = version("tmmail")
 
 BASE_API = "https://api.mail.tm"

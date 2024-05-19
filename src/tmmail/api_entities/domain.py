@@ -1,5 +1,6 @@
-from .parent_entity import TmMailEntity
 from pydantic import Field
+
+from .parent_entity import TmMailEntity
 
 
 class Domain(TmMailEntity):

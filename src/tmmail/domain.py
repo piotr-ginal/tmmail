@@ -1,7 +1,7 @@
-from .util.api_request import api_request
 from . import DOMAINS_ENDPOINT
 from .api_entities.domain import Domain
 from .exceptions.exceptions import UnhandledStatusCodeException
+from .util.api_request import api_request
 
 
 def get_domains(filter_inactive: bool = False) -> list[Domain]:

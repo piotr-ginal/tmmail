@@ -1,12 +1,12 @@
 import typing
 
-from .util.api_request import api_request
+from . import ACCCOUNTS_ENDPOINT
 from .api_entities.account import Account
-from .api_entities.errors import ConstraintViolation
 from .api_entities.domain import Domain
+from .api_entities.errors import ConstraintViolation
 from .exceptions import account as account_exceptions
 from .exceptions import exceptions
-from . import ACCCOUNTS_ENDPOINT
+from .util.api_request import api_request
 
 
 def _handle_violations(response_data: dict) -> None:

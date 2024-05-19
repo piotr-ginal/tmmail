@@ -1,8 +1,10 @@
-import requests
-from .. import BASE_API
 from urllib.parse import urljoin
-from ..exceptions import exceptions
+
+import requests
+
+from .. import BASE_API
 from ..exceptions import auth as auth_exceptions
+from ..exceptions import exceptions
 
 
 def api_request(method: str, endpoint: str, **kwargs) -> requests.Response:

@@ -1,5 +1,6 @@
-from .exceptions import TmMailException
 import typing
+
+from .exceptions import TmMailException
 
 
 class AuthException(TmMailException):
