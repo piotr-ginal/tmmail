@@ -20,3 +20,12 @@ def api_request(method: str, endpoint: str, **kwargs) -> requests.Response:
         raise auth_exceptions.UnauthorizedException()
 
     return response
+
+
+def authenticated_api_request(jwt_token: str, method: str, endpoint: str, **kwargs) -> requests.Response:
+    if "headers" not in kwargs:
+        kwargs["headers"] = {}
+
+    kwargs["headers"]["Authorization"] = f"Bearer {jwt_token}"
+
+    return api_request(method, endpoint, **kwargs)
