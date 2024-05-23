@@ -21,7 +21,7 @@ class InvalidCredentials(AuthException):
 
 class UnauthorizedException(AuthException):
 
-    def __init__(self, *, message: typing.Optional[str]) -> None:
+    def __init__(self, *, message: typing.Optional[str] = None) -> None:
         if message is None:
             message = "Unauthorized 401: Your token isn't correct"
 

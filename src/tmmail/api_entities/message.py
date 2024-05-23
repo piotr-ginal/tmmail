@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel, EmailStr, Field
 
 from .parent_entity import TmMailEntity
@@ -20,3 +22,19 @@ class InboxMessage(TmMailEntity):
     has_attachments: bool = Field(alias="hasAttachments")
     size: int = Field(repr=False, ge=0)
     download_url: str = Field(alias="downloadUrl", repr=False)
+
+
+class InboxMessageBrief(InboxMessage):
+    pass
+
+
+class InboxMessageContent(InboxMessage):
+    # verifications: list
+    cc: list[str] = Field(repr=False)
+    bcc: list[str] = Field(repr=False)
+    flagged: bool = Field(repr=False)
+    retention: bool = Field(repr=False)
+    retention_date: datetime = Field(alias="retentionDate", repr=False)
+    text: str
+    html: list[str] = Field(repr=False)
+    source_url: str = Field(alias="sourceUrl", repr=False)
