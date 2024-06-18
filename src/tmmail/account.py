@@ -1,17 +1,22 @@
+from __future__ import annotations
+
 import typing
 
 from . import ACCCOUNTS_ENDPOINT
 from .api_entities.account import Account
-from .api_entities.domain import Domain
 from .api_entities.errors import ConstraintViolation
 from .exceptions import account as account_exceptions
 from .exceptions import exceptions
 from .util.api_request import api_request
 
+if typing.TYPE_CHECKING:
+    from .api_entities.domain import Domain
+
+ACCOUNT_CREATION_EXPECTED_STATUS_CODE = 201
+CONSTRAINT_VIOLATION_EXPECTED_STATUS_CODE = 422
+
 
 def _handle_violations(response_data: dict) -> None:
-    print(response_data)
-
     exception_message = "Constraint violated when attempting to create an account: "
 
     violated_fields: list[str] = []
@@ -25,7 +30,7 @@ def _handle_violations(response_data: dict) -> None:
             f"{violation_checked.property_path} - {violation_checked.message}"
 
     raise account_exceptions.CredConstraintViolationException(
-        exception_message, violated_fields
+        exception_message, violated_fields,
     )
 
 
@@ -34,25 +39,31 @@ def create_account(
     username: str,
     password: str,
     *,
-    violations_handler: typing.Optional[typing.Callable] = None
+    violations_handler: None | typing.Callable = None,
 ) -> Account:
     request_json = {
         "address": f"{username}@{domain.domain}",
-        "password": password
+        "password": password,
     }
 
     response = api_request("POST", ACCCOUNTS_ENDPOINT, json=request_json)
 
-    if response.status_code == 201:
+    if response.status_code == ACCOUNT_CREATION_EXPECTED_STATUS_CODE:
         return Account.model_validate(response.json())
 
-    elif response.status_code == 422 and response.json()["@type"] == "ConstraintViolationList":
+    if (
+        response.status_code == CONSTRAINT_VIOLATION_EXPECTED_STATUS_CODE
+        and response.json()["@type"] == "ConstraintViolationList"
+    ):
         if violations_handler is None:
             violations_handler = _handle_violations
 
         _handle_violations(response.json())
 
-    else:
-        raise exceptions.UnhandledStatusCodeException(
-            "Encountered unhandled status code when creating an account " + response.status_code
-        )
+        raise exceptions.ConstraintViolationException
+
+    raise exceptions.UnhandledStatusCodeException(
+        ACCOUNT_CREATION_EXPECTED_STATUS_CODE,
+        response.status_code,
+        "Encountered unhandled status code when creating an account",
+    )
