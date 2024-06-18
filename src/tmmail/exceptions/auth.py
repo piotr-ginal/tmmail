@@ -1,4 +1,4 @@
-import typing
+from __future__ import annotations
 
 from .exceptions import TmMailException
 
@@ -8,10 +8,17 @@ class AuthException(TmMailException):
 
 
 class InvalidCredentials(AuthException):
-
-    def __init__(self, address: str, password: str, *, message: typing.Optional[str] = None) -> None:
+    def __init__(
+        self: InvalidCredentials,
+        address: str,
+        password: str,
+        *,
+        message: str | None = None,
+    ) -> None:
         if message is None:
-            message = "Invalid credentials provided. Please check your username and password"
+            message = (
+                "Invalid credentials provided. Please check your username and password"
+            )
 
         self.address = address
         self.password = password
@@ -20,8 +27,7 @@ class InvalidCredentials(AuthException):
 
 
 class UnauthorizedException(AuthException):
-
-    def __init__(self, *, message: typing.Optional[str] = None) -> None:
+    def __init__(self: UnauthorizedException, *, message: str | None = None) -> None:
         if message is None:
             message = "Unauthorized 401: Your token isn't correct"
 
