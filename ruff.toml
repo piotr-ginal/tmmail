@@ -1,0 +1,14 @@
+[lint]
+select = ["ALL"]
+ignore = [
+    # Documentation will be added in the future; currently ignoring warnings related to missing documentation
+    "D100",
+    "D101",
+    "D103",
+    "D104",
+    "D107",
+
+    "N818",
+
+    "S105"  # because of false positive in tmmail/__init__.py - token endpoint flagged
+]
