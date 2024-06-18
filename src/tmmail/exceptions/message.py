@@ -1,4 +1,4 @@
-import typing
+from __future__ import annotations
 
 from .exceptions import TmMailException
 
@@ -8,10 +8,17 @@ class MessageException(TmMailException):
 
 
 class MessagesPageIndexException(MessageException):
-
-    def __init__(self, page: int, *, message: typing.Optional[str] = None) -> None:
+    def __init__(
+        self: MessagesPageIndexException,
+        page: int,
+        *,
+        message: str | None = None,
+    ) -> None:
         if message is None:
-            message = "Invalid page index: {page} is not an integer larger than 0 or page is empty"
+            message = (
+                "Invalid page index: {page} is not an "
+                "integer larger than 0 or page is empty"
+            )
 
         self.page = page
 
@@ -19,8 +26,9 @@ class MessagesPageIndexException(MessageException):
 
 
 class MessageNotFound(MessageException):
-
-    def __init__(self, message_id: str, *, message: typing.Optional[str] = None) -> None:
+    def __init__(
+        self: MessageNotFound, message_id: str, *, message: str | None = None,
+    ) -> None:
         if message is None:
             message = "Message with id {message_id} not found"
 
