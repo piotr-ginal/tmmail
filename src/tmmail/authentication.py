@@ -1,7 +1,7 @@
 from . import TOKEN_ENDPOINT
+from .api_request import api_request
 from .exceptions.auth import InvalidCredentials
 from .exceptions.exceptions import UnhandledStatusCodeException
-from .util.api_request import api_request
 
 SUCCESSFUL_AUTH_STATUS_CODE = 200
 INVALID_CREDENTIALS_STATUS_CODE = 401

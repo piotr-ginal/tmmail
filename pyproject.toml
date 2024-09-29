@@ -33,5 +33,8 @@ lint.ignore = [
 
     "N818",
 
-    "S105"  # because of false positive in tmmail/__init__.py - token endpoint flagged
+    "S105",  # because of false positive in tmmail/__init__.py - token endpoint flagged
+
+    "D213",  # ignore rules causing conflicts
+    "D211",
 ]

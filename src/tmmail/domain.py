@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from . import DOMAINS_ENDPOINT
 from .api_entities.domain import Domain
+from .api_request import api_request
 from .exceptions.exceptions import UnhandledStatusCodeException
-from .util.api_request import api_request
 
 SUCCESFULL_DOMAIN_FETCH_STATUS_CODE = 200
 

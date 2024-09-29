@@ -5,9 +5,9 @@ from tmmail.api_entities.message import (
     InboxMessageBrief,
     InboxMessageContent,
 )
+from tmmail.api_request import authenticated_api_request
 from tmmail.exceptions import message as message_exceptions
 from tmmail.exceptions.exceptions import UnhandledStatusCodeException
-from tmmail.util.api_request import authenticated_api_request
 
 from . import MESSAGES_ENDPOINT
 

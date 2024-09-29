@@ -5,9 +5,9 @@ import typing
 from . import ACCCOUNTS_ENDPOINT
 from .api_entities.account import Account
 from .api_entities.errors import ConstraintViolation
+from .api_request import api_request
 from .exceptions import account as account_exceptions
 from .exceptions import exceptions
-from .util.api_request import api_request
 
 if typing.TYPE_CHECKING:
     from .api_entities.domain import Domain
