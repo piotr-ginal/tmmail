@@ -29,7 +29,6 @@ class InboxMessageBrief(InboxMessage):
 
 
 class InboxMessageContent(InboxMessage):
-    # verifications: list
     cc: list[str] = Field(repr=False)
     bcc: list[str] = Field(repr=False)
     flagged: bool = Field(repr=False)
