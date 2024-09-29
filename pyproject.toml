@@ -1,22 +1,25 @@
-[tool.poetry]
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
 name = "tmmail"
 version = "0.1.0"
 description = "A package that facilitates interaction with the Temp Mail API"
-authors = ["Piotr Ginał"]
-license = "MIT"
+authors = [
+    {name = "Piotr Ginał"}
+]
 readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
 
-[tool.poetry.dependencies]
-python = "^3.9"
-pydantic = {extras = ["email"], version = "^2.7.1"}
-requests = "^2.31.0"
-types-requests = "^2.32.0.20240602"
+[tool.setuptools]
+packages = ["find:"]
+package-dir = {"" = "src"}
+include-package-data = true
 
-[tool.poetry.dev-dependencies]
-
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.setuptools.dynamic]
+requires = {file = "requirements/base.txt"}
 
 [tool.ruff]
 lint.select = ["ALL"]
