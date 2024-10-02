@@ -11,15 +11,14 @@ authors = [
 ]
 readme = "README.md"
 requires-python = ">=3.9"
-license = "MIT"
+license = {"file" = "LICENSE"}
 
 [tool.setuptools]
-packages = ["find:"]
 package-dir = {"" = "src"}
 include-package-data = true
 
 [tool.setuptools.dynamic]
-requires = {file = "requirements/base.txt"}
+dependencies = { file = "requirements/base.txt" }
 
 [tool.ruff]
 lint.select = ["ALL"]
